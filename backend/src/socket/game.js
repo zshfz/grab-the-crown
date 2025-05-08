@@ -188,6 +188,10 @@ function registerGameHandlers(io, socket) {
     await gameRoomService.subWaitingPlayer(roomId);
 
     const roomInfo = await gameRoomService.getRoomInfo(roomId);
+    io.emit("room_state_update", { roomId, ...roomInfo });
+
+    // 3) **여기서** 나간 사용자 제외한 나머지에만 이벤트 보내기
+    socket.broadcast.to(roomId).emit("user_left", { userId });
 
     // Debug 로그
     console.log(
