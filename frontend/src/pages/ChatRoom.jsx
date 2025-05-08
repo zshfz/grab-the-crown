@@ -30,6 +30,39 @@ const ChatRoom = () => {
   const [options, setOptions] = useState([]);
 
   const chatEndRef = useRef(null); //채팅창 스크롤 자동으로 내려가도록
+  const countdownRef = useRef(null); //대기화면 남은 시간 실시간으로 줄어드는거 보이도록
+
+  useEffect(() => {
+    //대기화면 남은 시간 실시간으로 줄어드는거 보이도록
+    // 2) 서버에서 countdown 이벤트 받으면
+    const onCountdown = ({ seconds }) => {
+      // 초기값 세팅
+      setCountdown(seconds);
+
+      // 기존 타이머 있으면 정리
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current);
+      }
+
+      // 3) 1초마다 countdown--, 0 되면 null로 숨기고 타이머 정리
+      countdownRef.current = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(countdownRef.current);
+            countdownRef.current = null;
+            return null;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    };
+
+    socket.on("countdown", onCountdown);
+    return () => {
+      socket.off("countdown", onCountdown);
+      if (countdownRef.current) clearInterval(countdownRef.current);
+    };
+  }, []);
 
   //UserCard 점수 바로바로 반영되도록
   // ChatRoom.jsx 안, 다른 useEffect 훅들 아래에 추가
@@ -166,6 +199,19 @@ const ChatRoom = () => {
     socket.on("game_forced_end", handleForcedEnd);
     return () => {
       socket.off("game_forced_end", handleForcedEnd);
+    };
+  }, [navigate]);
+
+  // ✅ 게임 정상 종료 처리
+  useEffect(() => {
+    const handleGameFinished = ({ message }) => {
+      alert(message); // 우승자 메시지 alert
+      navigate("/lobby"); // 로비로 이동
+    };
+
+    socket.on("game_finished", handleGameFinished);
+    return () => {
+      socket.off("game_finished", handleGameFinished);
     };
   }, [navigate]);
 
