@@ -2,7 +2,7 @@
 const path = require("path");
 const express = require("express");
 const http = require("http");
-const { Server } = require('socket.io');
+const { Server } = require("socket.io");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 
@@ -13,16 +13,22 @@ const gameRoomRoutes = require("./src/api/GameRoomRoute");
 const connectedUserRoute = require("./src/api/ConnectedUserRoute");
 
 // 접속자 목록 위한
-const { addConnectedUser, removeConnectedUser } = require("./src/services/connectedUserService");
-const userModel = require("./src/models/usersModel");  // DB 접근용
+const {
+  addConnectedUser,
+  removeConnectedUser,
+} = require("./src/services/connectedUserService");
+const userModel = require("./src/models/usersModel"); // DB 접근용
 
 const app = express();
-app.use(cors());  // cors 허용
+app.use(cors()); // cors 허용
 app.use(express.json()); // JSON 요청 파싱
 app.use(express.urlencoded({ extended: true })); // form 요청 파싱
 
+// 프론트엔드 정적 파일 서빙
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
 //이미지 접근 경로 등록하기
-app.use('/uploads',express.static(path.join(__dirname, './src/uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "./src/uploads")));
 // 라우터 연결
 app.use("/auth", authRoutes);
 app.use("/ranking", rankingRoutes);
@@ -39,10 +45,10 @@ const chatHandler = require("./src/socket/chat");
 // 소켓 서버 생성
 const io = new Server(server, {
   cors: {
-    origin: "*",  // 개발 중만 사용! 배포 시엔 꼭 제한해야 함
+    origin: "*", // 개발 중만 사용! 배포 시엔 꼭 제한해야 함
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: false
-  }
+    credentials: false,
+  },
 });
 
 // ✅ 소켓 JWT 인증 미들웨어 (2단계)
@@ -56,21 +62,21 @@ io.use((socket, next) => {
     if (err) {
       return next(new Error("토큰 유효하지 않음"));
     }
-    socket.user = decoded;  // 👈 소켓에 유저 정보 주입
+    socket.user = decoded; // 👈 소켓에 유저 정보 주입
     next();
   });
 });
 
 // 확인용
-app.get('/', (req, res) => {
-  res.send('<h1>서버 생성 완료</h1>');
+app.get("/", (req, res) => {
+  res.send("<h1>서버 생성 완료</h1>");
 });
 
 // 소켓 연결 -> 로그인 완료시 연결됨.
 io.on("connection", async (socket) => {
   console.log(`🟢 연결됨: ${socket.id}`);
   const userId = socket.user.userId;
-  
+
   const [rows] = await userModel.getUserById(userId);
 
   if (!rows || rows.length === 0) {
@@ -101,7 +107,14 @@ io.on("connection", async (socket) => {
 
   socket.emit("news", "Hello Socket.io");
 });
+
 // 서버 실행
-server.listen(5001, () => {
-  console.log("🚀 서버 실행 중: http://localhost:5001");
+const PORT = process.env.PORT || 5001;
+server.listen(PORT, () => {
+  console.log(`🚀 서버 실행 중: http://localhost:${PORT}`);
+});
+
+// SPA 라우팅 처리 (React Router 대응)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
