@@ -52,7 +52,10 @@
 }
 
 @mixin red-button-style {
-  background-color: red;
+  background-color: #f26b0f;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
   color: white;
   font-weight: bold;
   padding: 5px;
@@ -67,7 +70,10 @@
 }
 
 @mixin blue-button-style {
-  background-color: blue;
+  background-color: #99cff9;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
   color: white;
   font-weight: bold;
   padding: 5px;
