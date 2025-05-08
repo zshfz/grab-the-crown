@@ -52,17 +52,21 @@ const io = new Server(server, {
 });
 
 // ✅ 소켓 JWT 인증 미들웨어 (2단계)
-io.use((socket, next) => {
+io.use(async (socket, next) => {
   const token = socket.handshake.auth.token;
-  if (!token) {
-    return next(new Error("토큰 없음"));
-  }
+  if (!token) return next(new Error("토큰 없음"));
 
-  jwt.verify(token, "mySecretKey", (err, decoded) => {
-    if (err) {
-      return next(new Error("토큰 유효하지 않음"));
+  jwt.verify(token, "mySecretKey", async (err, decoded) => {
+    if (err) return next(new Error("토큰 유효하지 않음"));
+
+    // ↓ 여기에 DB 조회를 추가
+    const [rows] = await userModel.getUserById(decoded.userId);
+    if (!rows.length) {
+      // DB에 더 이상 없는 유저면 연결 차단
+      return next(new Error("유효하지 않은 사용자입니다"));
     }
-    socket.user = decoded; // 👈 소켓에 유저 정보 주입
+
+    socket.user = decoded;
     next();
   });
 });
