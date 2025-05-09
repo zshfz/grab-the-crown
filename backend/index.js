@@ -112,10 +112,10 @@ io.on("connection", async (socket) => {
   socket.emit("news", "Hello Socket.io");
 });
 
-// 서버 실행
 const PORT = process.env.PORT || 5001;
-server.listen(PORT, () => {
-  console.log(`🚀 서버 실행 중: http://localhost:${PORT}`);
+// Render에서는 내부적으로 0.0.0.0:PORT 로 바인딩해야 외부에서 접근 가능
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 서버 실행 중: http://0.0.0.0:${PORT}`);
 });
 
 // SPA 라우팅 처리 (React Router 대응)
