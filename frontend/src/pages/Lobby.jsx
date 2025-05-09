@@ -140,23 +140,25 @@ const Lobby = () => {
           <div className="lobby-ranking">
             <h5 className="lobby-h5">랭킹</h5>
             <ul className="lobby-ranking-list">
-              {ranking.map((a, i) => {
-                return (
-                  <li className="lobby-ranking-list-li" key={i}>
-                    <div className="lobby-ranking-list-left">{i + 1}위</div>
-                    <div className="lobby-ranking-list-center">
-                      <img
-                        className="lobby-ranking-list-center-image"
-                        src={`${API}${a.PROFILE_IMG}`}
-                      />
-                      {a.USERNAME}
-                    </div>
-                    <div className="lobby-ranking-list-right">
-                      👑X{a.CROWN_CNT}
-                    </div>
-                  </li>
-                );
-              })}
+              {ranking
+                .filter((a) => a.CROWN_CNT > 0) // 👈 왕관 0개인 유저는 걸러내기
+                .map((a, i) => {
+                  return (
+                    <li className="lobby-ranking-list-li" key={i}>
+                      <div className="lobby-ranking-list-left">{i + 1}위</div>
+                      <div className="lobby-ranking-list-center">
+                        <img
+                          className="lobby-ranking-list-center-image"
+                          src={`${API}${a.PROFILE_IMG}`}
+                        />
+                        {a.USERNAME}
+                      </div>
+                      <div className="lobby-ranking-list-right">
+                        👑X{a.CROWN_CNT}
+                      </div>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
           <div className="lobby-users">
