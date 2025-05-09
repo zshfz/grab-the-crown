@@ -8,7 +8,7 @@ import "../styles/ChatRoom.scss";
 import { AuthContext } from "../context/AuthContext";
 
 const ChatRoom = () => {
-  const QUIZ_TIME = 5;
+  const QUIZ_TIME = 10;
   const { id: roomId } = useParams();
   const { user: currentUser } = useContext(AuthContext);
   const navigate = useNavigate();

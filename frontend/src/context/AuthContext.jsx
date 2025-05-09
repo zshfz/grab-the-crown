@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import socket from "../socket";
 
@@ -6,6 +7,8 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const API = import.meta.env.VITE_API_URL;
+
+  const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
 
@@ -42,6 +45,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
+    navigate("/", { replace: true });
+    window.location.reload();
   };
 
   return (

@@ -186,7 +186,6 @@ const Lobby = () => {
               className="lobby-logout-button"
               onClick={() => {
                 logout();
-                navigate("/");
               }}
             >
               로그아웃
