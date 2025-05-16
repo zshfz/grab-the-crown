@@ -1,7 +1,7 @@
 # README
 
 ## 👑 왕관을 자바쓰 : 실시간 채팅 기반 게임 프로그램
-
+![Image](https://github.com/user-attachments/assets/d450ee3a-ec63-4bfb-8cba-756635c9e5ee)
 - 배포 url : [https://grab-the-crown.onrender.com/](https://grab-the-crown.onrender.com/)
 
 ## 1. 프로젝트 소개
