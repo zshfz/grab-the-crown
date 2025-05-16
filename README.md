@@ -68,7 +68,7 @@
 
 | 홈 화면 |
 | --- |
-| ![Image](https://github.com/user-attachments/assets/3af9920d-b334-4a93-b5b3-6ba8ca774bdd) |
+| ![Image](https://github.com/user-attachments/assets/2a15f531-d765-4e77-b4d8-340ff5a03d69) |
 | - 최초로 접속시 나타나는 화면
 - 주제에 맞게 백그라운드 이미지에 왕관이 둥둥 떠다님
 - 닉네임, 비밀번호, 프로필 이미지를 사용자로 부터 받아 회원가입 처리
