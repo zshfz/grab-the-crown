@@ -17,13 +17,11 @@
 
 | 이름 | 링크 | 역할 |
 | --- | --- | --- |
-| 김송이 | [@kimsongie12](https://github.com/kimsongie12) | **백엔드**
-게임방 생성/참가 로직, 깃 PR관리  |
-| 김지우 | [@jiu702](https://github.com/jiu702) | **백엔드**
-로그인, 회원가입, 로그아웃, 채팅 패널티 점수 차감 로직 |
+| 김송이 | [@kimsongie12](https://github.com/kimsongie12) | **백엔드**<br>게임방 생성/참가 로직, 깃 PR관리 |
+| 김지우 | [@jiu702](https://github.com/jiu702) | **백엔드**<br>로그인, 회원가입, 로그아웃, 채팅 패널티 점수 차감 로직 |
 | 이정민 | [@zshfz](https://github.com/zshfz) | **프론트엔드** |
-| 이채린 | [@Rix01](https://github.com/Rix01) | **백엔드**
-소켓 통신, 게임 진행 로직, 채팅, 접속자 목록 API, 방 목록 API, 랭킹 목록 API |
+| 이채린 | [@Rix01](https://github.com/Rix01) | **백엔드**<br>소켓 통신, 게임 진행 로직, 채팅, 접속자 목록 API, 방 목록 API, 랭킹 목록 API |
+
 
 ## 3. 개발 환경
 
@@ -84,55 +82,55 @@
 ### [로비 화면]
 | 로비 화면 | 
 |------|
-| ![Image](https://github.com/user-attachments/assets/38551b15-404e-4fb2-b5ef-b884b7164eb0) |
+| ![Image](https://github.com/user-attachments/assets/6d3f4e64-af2e-40a3-90a4-a97d81873c3a) |
 - 로그인 성공시 나타나는 화면
 - 로그아웃 버튼 클릭 시 홈 화면으로 이동되면서 로그아웃 처리
 - 접속시 접속자 목록에 현재 접속한 사용자 목록 출력
 - 방 만들기 버튼 클릭 시 모달창이 출력되고 인원 수 선택후 방 만들기
 - 사용자가 들어올때 마다 접속자 목록 실시간으로 반영
+- 사용자가 방에 들어올때마다 UserCard 목록에 실시간으로 추가
 - UserCard에 사용자 프로필 이미지, 닉네임, 점수 출력
-
+<br>
 | 로비 화면 | 
 |------|
-| ![Image](https://github.com/user-attachments/assets/21acedf4-863c-4c87-948d-61c7fb67557a) |
+| ![Image](https://github.com/user-attachments/assets/1dc7105c-7373-421a-8f1b-1fc15fb4671d) |
 - 사용자가 방을 만들면 RoomCard 실시간 출력
 - 방 인원이 다 차거나 이미 게임이 시작된 방에 입장하려고 하면 alert창으로 경고메시지 출력
 
 ### [채팅방 화면]
 | 채팅방 화면 | 
 |------|
-| ![Image](https://github.com/user-attachments/assets/1dc7105c-7373-421a-8f1b-1fc15fb4671d) |
-- 사용자가 방에 들어올때마다 UserCard 목록에 실시간으로 추가
+| ![Image](https://github.com/user-attachments/assets/21acedf4-863c-4c87-948d-61c7fb67557a) |
 - 인원이 다 차면 자동으로 게임이 시작되고 5초 카운트다운 후 게임 시작
 - 총 5라운드로 한 라운드당 5문제가 출제되고 문제는 게임마다 랜덤으로 출력됨
 - 게임하는 내내 실시간 채팅 가능
 - 채팅과 점수는 실시간으로 반영
-
-| 채팅방 화면 | 
-|------|
-| ![Image](https://github.com/user-attachments/assets/b54d82bd-0299-49ce-a820-97df84d5c7a6) |
-- 1등으로 정답을 맞추면 +30점, 2등 +20점, 3등 +10점, 4등부턴 0점
-- 화면 오른쪽 채팅창에 사용자들이 입력한 메시지와 SYSTEM 메시지 출력
-
-| 채팅방 화면 | 
-|------|
-| ![Image](https://github.com/user-attachments/assets/a0a07097-3cd5-42e7-974f-0ce74d2b2d10) |
-- 욕설이나 금지어를 입력하면 10점 감점
-
-| 채팅방 화면 | 
-|------|
-| ![Image](https://github.com/user-attachments/assets/2b6cad78-a16f-44ff-a6a3-715ae92973ac) |
-- 동점자가 발생할 확률을 낮추기 위해 마지막 라운드는 1등 50점, 2등 30점, 3등 10점 부여
-
+<br>
 | 채팅방 화면 | 
 |------|
 | ![Image](https://github.com/user-attachments/assets/d2710303-f084-4ee2-9364-874ff15ebbd9) |
-- 모든 문제가 출력되고 게임이 종료되면 가장 높은 점수를 받은 사용자는 왕관을 1개 얻게됨
-- 왕관수에 따라 전체 사용자의 랭킹 출력
-
+- 1등으로 정답을 맞추면 +30점, 2등 +20점, 3등 +10점, 4등부턴 0점
+- 화면 오른쪽 채팅창에 사용자들이 입력한 메시지와 SYSTEM 메시지 출력
+<br>
 | 채팅방 화면 | 
 |------|
-| ![Image](https://github.com/user-attachments/assets/6d3f4e64-af2e-40a3-90a4-a97d81873c3a) |
+| ![Image](https://github.com/user-attachments/assets/2b6cad78-a16f-44ff-a6a3-715ae92973ac) |
+- 욕설이나 금지어를 입력하면 10점 감점
+<br>
+| 채팅방 화면 | 
+|------|
+| ![Image](https://github.com/user-attachments/assets/a0a07097-3cd5-42e7-974f-0ce74d2b2d10) |
+- 동점자가 발생할 확률을 낮추기 위해 마지막 라운드는 1등 50점, 2등 30점, 3등 10점 부여
+<br>
+| 채팅방 화면 | 
+|------|
+| ![Image](https://github.com/user-attachments/assets/b54d82bd-0299-49ce-a820-97df84d5c7a6) |
+- 모든 문제가 출력되고 게임이 종료되면 가장 높은 점수를 받은 사용자는 왕관을 1개 얻게됨
+- 왕관수에 따라 전체 사용자의 랭킹 출력
+<br>
+| 채팅방 화면 | 
+|------|
+| ![Image](https://github.com/user-attachments/assets/38551b15-404e-4fb2-b5ef-b884b7164eb0) |
 - 언제든 방에서 나갈 수 있으며 방에 인원이 한명만 남게되면 방이 없어지고 해당 게임은 무효 처리
 
 ## 7. 개선 목표
