@@ -3,6 +3,7 @@
 ![Image](https://github.com/user-attachments/assets/d60e6ae9-881d-471c-909a-f01c55633446)
 
 - 배포 url : [https://grab-the-crown.onrender.com/](https://grab-the-crown.onrender.com/)
+- 팀플 레포지토리 : [https://github.com/crown-game/crown-game](https://github.com/crown-game/crown-game)
 
 ## 1. 프로젝트 소개
 
